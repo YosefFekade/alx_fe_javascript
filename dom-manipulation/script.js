@@ -47,3 +47,22 @@ function createAddQuoteForm() {
       alert("Please enter both quote and category!");
       return;
     }
+         // Create a new quote object
+    const newQuote = { text: newQuoteText, category: newQuoteCategory };
+
+    // Add the new quote to the quotes array
+    quotes.push(newQuote);
+
+    // Clear the input fields
+    quoteInput.value = "";
+    categoryInput.value = "";
+
+    // Display a message or call showRandomQuote to update the displayed quote
+    console.log("Quote added successfully!");
+    // showRandomQuote(); // Uncomment this to automatically update the displayed quote
+  });
+
+  // Append the form to the container element
+  formContainer.appendChild(form);
+}
+
