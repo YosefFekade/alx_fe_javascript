@@ -21,3 +21,43 @@ function addQuote(){
    }
 }
 document.getElementById('newQuote').addEventListener('click',showRandomQuote);
+
+// Load quotes from local storage
+function loadQuotes() {
+    const storedQuotes = localStorage.getItem('quotes');
+    if (storedQuotes) {
+      quotes = JSON.parse(storedQuotes);
+    }
+  }
+  
+  // Save quotes to local storage
+  function saveQuotes() {
+    localStorage.setItem('quotes', JSON.stringify(quotes));
+  }
+  loadQuotes();
+
+
+  
+  function exportToJsonFile() {
+    const dataStr = JSON.stringify(quotes);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+  
+    const exportFileDefaultName = 'quotes.json';
+  
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+  }
+  // Function to import quotes from a JSON file
+function importFromJsonFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = function(event) {
+      const importedQuotes = JSON.parse(event.target.result);
+      quotes.push(...importedQuotes);
+      saveQuotes();
+      alert('Quotes imported successfully!');
+    };
+    fileReader.readAsText(event.target.files[0]);
+  }
+
