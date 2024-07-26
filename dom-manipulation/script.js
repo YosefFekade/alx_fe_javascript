@@ -76,7 +76,7 @@ function importFromJsonFile(event) {
 }
 
 // Function to populate category filter dynamically
-function populateCategoryFilter() {
+function populateCategories() {
   const categoryFilter = document.getElementById('categoryFilter');
   const categories = [...new Set(quotes.map(quote => quote.category))];
   categoryFilter.innerHTML = '<option value="all">All Categories</option>';
