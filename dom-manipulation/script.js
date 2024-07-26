@@ -44,18 +44,22 @@ document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 // Load the last viewed quote when the page loads
 window.onload = loadLastViewedQuote;
 
-// Function to export quotes to a JSON file
+// Function to export quotes to a JSON file using Blob
 function exportToJsonFile() {
-    const dataStr = JSON.stringify(quotes);
-    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-  
-    const exportFileDefaultName = 'quotes.json';
-  
-    let linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
-    linkElement.click();
-  }
+  const dataStr = JSON.stringify(quotes);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const exportFileDefaultName = 'quotes.json';
+
+  const linkElement = document.createElement('a');
+  linkElement.href = url;
+  linkElement.download = exportFileDefaultName;
+  document.body.appendChild(linkElement); // Append the link to the DOM
+  linkElement.click();
+  document.body.removeChild(linkElement); // Remove the link from the DOM
+  URL.revokeObjectURL(url); // Release the URL object
+}
   // Function to import quotes from a JSON file
 function importFromJsonFile(event) {
     const fileReader = new FileReader();
