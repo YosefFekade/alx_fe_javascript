@@ -236,7 +236,7 @@ function showNotification(message) {
 }
 
 // Enhanced syncData function to show notifications
-async function syncData() {
+async function syncQuotes() {
   const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
   const serverQuotes = await fetchQuotesFromServer();
 
