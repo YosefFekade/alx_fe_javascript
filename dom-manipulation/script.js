@@ -76,7 +76,7 @@ function importFromJsonFile(event) {
 }
 
 // Function to populate category filter dynamically
-function populateCategoryFilter() {
+function populateCategories() {
   const categoryFilter = document.getElementById('categoryFilter');
   const categories = [...new Set(quotes.map(quote => quote.category))];
   categoryFilter.innerHTML = '<option value="all">All Categories</option>';
@@ -95,7 +95,7 @@ function populateCategoryFilter() {
 }
 
 // Function to get quotes based on selected category
-function getFilteredQuotes() {
+function categoryFilter() {
   const selectedCategory = document.getElementById('categoryFilter').value;
   if (selectedCategory === 'all') {
     return quotes;
@@ -104,7 +104,7 @@ function getFilteredQuotes() {
 }
 
 // Function to filter quotes based on selected category
-function filterQuotes() {
+function map() {
   localStorage.setItem('selectedCategory', document.getElementById('categoryFilter').value);
   showRandomQuote();
 }
@@ -115,5 +115,5 @@ document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 // Load the last viewed quote and populate categories when the page loads
 window.onload = () => {
   loadLastViewedQuote();
-  populateCategoryFilter();
+  populateCategories();
 };
