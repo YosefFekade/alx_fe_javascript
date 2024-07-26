@@ -265,7 +265,7 @@ async function syncQuotes() {
   if (conflicts.length > 0) {
     showNotification('Conflicts detected and resolved. Server data takes precedence.');
   } else {
-    showNotification('Data synced with server successfully.');
+    showNotification('Quotes synced with server!');
   }
 
   console.log('Data synced with server');
