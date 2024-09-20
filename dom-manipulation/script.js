@@ -87,6 +87,17 @@ function showRandomQuote() {
   document.getElementById('quoteDisplay').innerHTML = `"${randomQuote.text}" - Category: ${randomQuote.category}`;
 }
 
+// Create and insert the form to add a new quote
+function createAddQuoteForm() {
+  const formContainer = document.createElement('div');
+  formContainer.innerHTML = `
+    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+    <button onclick="addQuote()">Add Quote</button>
+  `;
+  document.body.appendChild(formContainer);
+}
+
 // Add a new quote and sync it with the server
 function addQuote() {
   const newQuoteText = document.getElementById('newQuoteText').value;
@@ -169,6 +180,7 @@ function init() {
   showRandomQuote();
   fetchQuotesFromServer();
   setInterval(fetchQuotesFromServer, 60000); // Periodic sync every minute
+  createAddQuoteForm(); // Create the quote form when initializing
 }
 
 window.onload = init;
