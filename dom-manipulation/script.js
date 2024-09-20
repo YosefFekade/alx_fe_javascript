@@ -93,9 +93,12 @@ function createAddQuoteForm() {
   formContainer.innerHTML = `
     <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
     <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button onclick="addQuote()">Add Quote</button>
+    <button id="addQuoteButton">Add Quote</button>
   `;
   document.body.appendChild(formContainer);
+
+  // Add event listener for the add quote button
+  document.getElementById('addQuoteButton').addEventListener('click', addQuote);
 }
 
 // Add a new quote and sync it with the server
@@ -181,6 +184,18 @@ function init() {
   fetchQuotesFromServer();
   setInterval(fetchQuotesFromServer, 60000); // Periodic sync every minute
   createAddQuoteForm(); // Create the quote form when initializing
+
+  // Add event listener for category filtering
+  document.getElementById('categoryFilter').addEventListener('change', filterQuotes);
+
+  // Add event listener for the show random quote button
+  document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+
+  // Add event listener for file input (importing quotes)
+  document.getElementById('importFile').addEventListener('change', importFromJsonFile);
+
+  // Add event listener for the export button
+  document.getElementById('exportQuotesButton').addEventListener('click', exportToJsonFile);
 }
 
-window.onload = init;
+window.addEventListener('load', init);
